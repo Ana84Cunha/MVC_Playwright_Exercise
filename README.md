@@ -44,3 +44,17 @@ The goal of this exercise is to perform the following steps on the [TodoMVC](htt
    ```bash
    git clone https://github.com/<your-username>/Playwright_Exercises.git
    cd Playwright_Exercises
+   
+2. Install dependencies:
+   ```bash
+   npm install
+
+3. Run the tests:
+   ```bash
+   npm playwright test
+   
+4. Generate and view the Allure report:
+   ```bash
+   npx playwright test && allure generate my-allure-results --clean && allure open
+
+Happy Testing! 🎉
