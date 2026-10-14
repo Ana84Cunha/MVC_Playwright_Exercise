@@ -1,60 +1,85 @@
 # TodoMVC Playwright Exercise
 
-This repository contains an automated test script for **UI testing** of the TodoMVC application using **Playwright**.
+A small UI automation exercise using Playwright and JavaScript to practise browser interactions, assertions and Allure reporting.
 
-## 📝 Challenge Overview
+## Exercise flow
 
-The goal of this exercise is to perform the following steps on the [TodoMVC](https://todomvc.com/examples/react/dist/) application:
+The test opens the TodoMVC React application and follows a task management journey:
 
-1. Navigate to the TodoMVC page and confirm that the URL is correct.
-2. Add a TODO item with the text:
-   - `"TODO 1 - "` concatenated with the current date.
-3. Verify that the TODO item appears in the list.
-4. Add another TODO item with the text:
-   - `"TODO 2 - "` concatenated with tomorrow's date.
-5. Mark the current date TODO item (`TODO 1`) as **completed**.
-6. Verify that the completed item is displayed as **struck-through**.
-7. Delete the `TODO 2` item (tomorrow's date).
-8. Verify that the deleted item is removed from the list.
-9. Generate a **test report** summarizing the test results using **Allure**.
+- Check the application URL.
+- Create a task using today's date and verify its text.
+- Create a second task using tomorrow's date.
+- Mark the first task as completed and check its completed state.
+- Mark the second task as completed, then delete it.
 
----
+## Tools
 
-## 🚀 Features
+- Playwright Test
+- JavaScript
+- Allure Playwright reporter
 
-- **Test Framework**: [Playwright](https://playwright.dev/)
-- **Assertions**: Ensures correct functionality through robust checks.
-- **Test Reporting**: Generates detailed test reports using [Allure](https://docs.qameta.io/allure/).
-- **Dynamic Data**: Uses current and next day's dates to create unique TODO items.
+The configuration includes Chromium and Firefox.
 
----
+## Setup
 
-## 📂 Project Structure
+You need Git, Node.js and npm installed.
 
-- **`tests/`**: Contains the Playwright test scripts.
-- **`playwright.config.js`**: Playwright configuration file, specifying browser settings, test retries, reporting, and more.
-- **`my-allure-results/`**: Folder for Allure test results.
-- **`README.md`**: Project documentation (you are reading it now).
+Clone the repository:
 
----
+```bash
+git clone https://github.com/Ana84Cunha/MVC_Playwright_Exercise.git
+cd MVC_Playwright_Exercise
+```
 
-## 🛠 Setup and Installation
+Install the project dependencies:
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/<your-username>/Playwright_Exercises.git
-   cd Playwright_Exercises
-   
-2. Install dependencies:
-   ```bash
-   npm install
+```bash
+npm ci
+```
 
-3. Run the tests:
-   ```bash
-   npm playwright test
-   
-4. Generate and view the Allure report:
-   ```bash
-   npx playwright test && allure generate my-allure-results --clean && allure open
+Install the browsers configured for the tests:
 
-Happy Testing! 🎉
+```bash
+npx playwright install chromium firefox
+```
+
+## Run the test
+
+```bash
+npm test
+```
+
+To run with a visible browser:
+
+```bash
+npm test -- --headed
+```
+
+## Allure reporting
+
+The configured reporter writes test results to `allure-results/`.
+
+Generating and opening the HTML report requires Java and the Allure command-line tool to be installed and available in your PATH.
+
+After running the test:
+
+```bash
+npm run allure:generate
+npm run allure:open
+```
+
+## Project structure
+
+- `tests/MVC_Exercise.spec.js` — the automated test.
+- `playwright.config.js` — browser, retry and reporter configuration.
+- `package.json` — dependencies and execution scripts.
+- `allure-results/` — generated test results.
+- `allure-report/` — generated HTML report.
+
+## Scope and limitations
+
+This is a learning exercise containing one UI test flow.
+
+It depends on an externally hosted demo application, so changes to that application can affect execution.
+
+Further improvements include a more precise deletion assertion, locators that rely less on item position, and additional independent test scenarios.
