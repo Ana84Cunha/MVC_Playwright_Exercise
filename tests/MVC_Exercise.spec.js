@@ -46,6 +46,15 @@ test('ui_Automation_MVC', async ({ page }) => {
     await destroyButton.hover();
     await destroyButton.click();
 
-    //10. Verify that the second to-do item is removed from the list
-    await expect(page.locator('.todo-list li .view label')).not.toHaveText('TODO 2 - ' + tomorrowDateString);
+    //10.Verify that the deleted task no longer exists
+await expect(
+    page.getByText('TODO 2 - ' + tomorrowDateString, { exact: true })
+).toHaveCount(0);
+
+// Verify that the first task remains
+await expect(page.locator('.todo-list li')).toHaveCount(1);
+
+await expect(
+    page.getByText('TODO 1 - ' + currentDate, { exact: true })
+).toBeVisible();
 });
